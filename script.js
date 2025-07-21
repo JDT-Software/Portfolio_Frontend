@@ -47,7 +47,8 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     submitButton.disabled = true;
     
     try {
-        const response = await fetch('/send-email', {
+        // Updated to use your Render backend URL
+        const response = await fetch('https://portfolio-backend-t4iq.onrender.com/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
