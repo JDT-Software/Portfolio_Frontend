@@ -40,6 +40,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Manual CORS headers as backup
 app.use((req, res, next) => {
@@ -82,7 +83,7 @@ app.get('/test-cors', (req, res) => {
 });
 
 // Nodemailer transporter configuration
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
