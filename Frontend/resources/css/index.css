@@ -221,6 +221,7 @@
         }
         .services h2 {
             color: var(--text-color);
+            font-size: 6rem;
         }
 
         /* Service Packages Grid */
@@ -506,7 +507,7 @@
             object-fit: cover;
         }
         .project-card h3 {
-            font-size: 3rem;
+            font-size: 5rem;
         }
         .project-card p {
             font-size: 1.5rem;
@@ -649,6 +650,12 @@
         }
 
         @media(max-width: 1285px) {
+            .projects .heading {
+                font-size: 3rem;
+            }
+            .services h2 {
+                font-size: 5rem;
+            }
             .header {
                 padding: 2rem 5%;
             }
