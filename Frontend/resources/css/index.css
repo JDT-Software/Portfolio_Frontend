@@ -1,11 +1,11 @@
-        * {
+* {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
           text-decoration: none;
           scroll-behavior: smooth;
-          font-family: "Poppins";
-        }
+          font-family: "Poppins", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* ✅ SOLUTION: Added fallbacks */
+     }   
         :root {
           --bg-color: #080808;
           --second-bg-color: #101010;
@@ -315,6 +315,11 @@
             font-weight: 700;
             color: var(--main-color);
             margin-bottom: 1.5rem;
+            font-family: "Poppins", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            font-feature-settings: "kern" 1, "liga" 1;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .learn-more-btn {
             color: var(--main-color);
@@ -386,6 +391,11 @@
             font-weight: 700;
             color: var(--main-color);
             margin-bottom: 2rem;
+            font-family: "Poppins", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            font-feature-settings: "kern" 1, "liga" 1;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .package-features {
             list-style: none;
