@@ -10,9 +10,11 @@ const corsOptions = {
   origin: [
     'https://www.softflair.co.za',
     'https://softflair.co.za',
+    'https://jdt-software.github.io',
+    'https://portfolio-frontend-eosin-xi.vercel.app',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'http://localhost:5500', // for Live Server
+    'http://localhost:5500',
     'http://127.0.0.1:5500'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -46,37 +48,30 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Email configuration
-const createTransport = () => {
-  // Gmail configuration (most common)
-  if (process.env.EMAIL_SERVICE === 'gmail') {
-    return nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS // Use App Password for Gmail
-      }
-    });
-  }
-  
-  // Generic SMTP configuration
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT || 587,
-    secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+// Email configuration - FIXED VERSION
+const createTransporter = () => {
+  return nodemailer.createTransporter({
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.EMAIL_PORT) || 587,
+    secure: process.env.EMAIL_SECURE === 'true',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
+    },
+    tls: {
+      rejectUnauthorized: process.env.EMAIL_TLS_REJECT_UNAUTHORIZED !== 'false'
     }
   });
 };
 
-// Input validation function
+// Input validation function - FIXED TO MATCH FRONTEND
 const validateContactForm = (data) => {
   const errors = [];
   
-  if (!data.name || data.name.trim().length < 2) {
-    errors.push('Name must be at least 2 characters long');
+  // Check for both 'name' and 'fullName' to be flexible
+  const name = data.fullName || data.name;
+  if (!name || name.trim().length < 2) {
+    errors.push('Full name must be at least 2 characters long');
   }
   
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
@@ -89,8 +84,10 @@ const validateContactForm = (data) => {
   
   // Sanitize inputs
   const sanitized = {
-    name: data.name?.trim().substring(0, 100),
+    fullName: name?.trim().substring(0, 100),
     email: data.email?.trim().toLowerCase().substring(0, 100),
+    phone: data.phone?.trim().substring(0, 20) || '',
+    subject: data.subject?.trim().substring(0, 200) || '',
     message: data.message?.trim().substring(0, 2000)
   };
   
@@ -101,8 +98,9 @@ const validateContactForm = (data) => {
 app.post('/send-email', async (req, res) => {
   try {
     console.log('Received contact form submission:', {
-      name: req.body.name,
+      fullName: req.body.fullName,
       email: req.body.email,
+      subject: req.body.subject,
       messageLength: req.body.message?.length
     });
 
@@ -110,6 +108,7 @@ app.post('/send-email', async (req, res) => {
     const { errors, sanitized } = validateContactForm(req.body);
     
     if (errors.length > 0) {
+      console.log('Validation errors:', errors);
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
@@ -143,38 +142,90 @@ app.post('/send-email', async (req, res) => {
 
     // Email content
     const mailOptions = {
-      from: `"${sanitized.name}" <${process.env.EMAIL_USER}>`,
-      to: process.env.RECIPIENT_EMAIL || process.env.EMAIL_USER,
+      from: `"${sanitized.fullName}" <${process.env.EMAIL_USER}>`,
+      to: 'devwithjacques@gmail.com',
       replyTo: sanitized.email,
-      subject: `Portfolio Contact: Message from ${sanitized.name}`,
+      subject: sanitized.subject || `Portfolio Contact: Message from ${sanitized.fullName}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-            New Contact Form Submission
-          </h2>
-          
-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <h3 style="color: #495057; margin-top: 0;">Contact Details:</h3>
-            <p><strong>Name:</strong> ${sanitized.name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${sanitized.email}">${sanitized.email}</a></p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; border-radius: 10px; overflow: hidden;">
+          <!-- Header Section -->
+          <div style="background: linear-gradient(90deg, #df8908, #ff1d15); padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px; font-weight: bold; color: #ffffff;">
+              New Contact Form Submission
+            </h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px; color: #ffffff;">
+              Someone wants to connect with you!
+            </p>
           </div>
           
-          <div style="background-color: #ffffff; padding: 20px; border: 1px solid #dee2e6; border-radius: 5px;">
-            <h3 style="color: #495057; margin-top: 0;">Message:</h3>
-            <p style="line-height: 1.6; color: #333;">${sanitized.message.replace(/\n/g, '<br>')}</p>
+          <!-- Content Section -->
+          <div style="padding: 30px; background-color: #ffffff;">
+            <!-- Contact Details Card -->
+            <div style="background-color: #f8f9fa; border-left: 5px solid #ea580c; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
+              <h3 style="color: #ea580c; font-size: 20px; margin: 0 0 15px 0;">
+                Contact Details
+              </h3>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c; width: 80px;">Name:</td>
+                  <td style="padding: 8px 0; color: #333;">${sanitized.fullName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Email:</td>
+                  <td style="padding: 8px 0;">
+                    <a href="mailto:${sanitized.email}" style="color: #df8908; text-decoration: none; font-weight: bold;">${sanitized.email}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Phone:</td>
+                  <td style="padding: 8px 0; color: #333;">${sanitized.phone || 'Not provided'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Subject:</td>
+                  <td style="padding: 8px 0; color: #333;">${sanitized.subject || 'No subject'}</td>
+                </tr>
+              </table>
+            </div>
+            
+            <!-- Message Card -->
+            <div style="background-color: #f8f9fa; border-left: 5px solid #df8908; padding: 20px; border-radius: 5px;">
+              <h3 style="color: #ea580c; font-size: 20px; margin: 0 0 15px 0;">
+                Message
+              </h3>
+              <div style="background-color: #ffffff; padding: 15px; border-radius: 5px; border: 1px solid #e9ecef;">
+                <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #333; white-space: pre-wrap;">${sanitized.message}</p>
+              </div>
+            </div>
           </div>
           
-          <div style="margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 5px; font-size: 12px; color: #6c757d;">
-            <p>This email was sent from your portfolio contact form on ${new Date().toLocaleString()}.</p>
-            <p>Reply directly to this email to respond to ${sanitized.name}.</p>
+          <!-- Footer Section -->
+          <div style="background-color: #333333; padding: 20px; text-align: center;">
+            <p style="margin: 0; font-size: 14px; color: #ffffff;">
+              Sent from your Portfolio Contact Form
+            </p>
+            <p style="margin: 10px 0 0 0; font-size: 14px;">
+              <a href="https://www.softflair.co.za" style="color: #df8908; text-decoration: none; font-weight: bold;">
+                Visit Portfolio Website
+              </a>
+            </p>
+            <div style="margin-top: 15px;">
+              <span style="color: #df8908; font-size: 18px; font-weight: bold;">
+                Jacques du Toit - Web Developer
+              </span>
+            </div>
+            <div style="margin-top: 10px; font-size: 12px; color: #999;">
+              Sent on: ${new Date().toLocaleString()}
+            </div>
           </div>
         </div>
       `,
       text: `
 New Contact Form Submission
 
-Name: ${sanitized.name}
+Name: ${sanitized.fullName}
 Email: ${sanitized.email}
+Phone: ${sanitized.phone || 'Not provided'}
+Subject: ${sanitized.subject || 'No subject'}
 
 Message:
 ${sanitized.message}
@@ -196,7 +247,6 @@ Sent on: ${new Date().toLocaleString()}
   } catch (error) {
     console.error('Error sending email:', error);
     
-    // Don't expose internal errors to client
     res.status(500).json({
       success: false,
       message: 'Failed to send email. Please try again later.',
@@ -225,6 +275,7 @@ app.use('*', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📧 Email service: ${process.env.EMAIL_SERVICE || 'SMTP'}`);
+  console.log(`📧 Email service: Gmail`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔐 CORS configured for multiple origins`);
 });
