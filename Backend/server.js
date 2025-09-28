@@ -308,4 +308,4 @@ app.listen(PORT, () => {
     console.log(`📧 Email service: Gmail`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔐 CORS configured for: ${corsOptions.origin.join(', ')}`);
-});
+});// Force redeploy
