@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 const app = express();
@@ -28,6 +28,9 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Initialize SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 // Basic route for testing
 app.get('/', (req, res) => {
   res.json({ 
@@ -48,23 +51,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Email configuration - FIXED VERSION
-const createTransporter = () => {
-  return nodemailer.createTransporter({
-    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT) || 587,
-    secure: process.env.EMAIL_SECURE === 'true',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    },
-    tls: {
-      rejectUnauthorized: process.env.EMAIL_TLS_REJECT_UNAUTHORIZED !== 'false'
-    }
-  });
-};
-
-// Input validation function - FIXED TO MATCH FRONTEND
+// Input validation function
 const validateContactForm = (data) => {
   const errors = [];
   
@@ -116,34 +103,19 @@ app.post('/send-email', async (req, res) => {
       });
     }
 
-    // Check if email configuration exists
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.error('Email configuration missing');
-      return res.status(500).json({
-        success: false,
-        message: 'Server configuration error'
-      });
-    }
-
-    // Create transporter
-    const transporter = createTransporter();
-
-    // Verify transporter configuration
-    try {
-      await transporter.verify();
-      console.log('Email transporter verified successfully');
-    } catch (verifyError) {
-      console.error('Email transporter verification failed:', verifyError);
+    // Check if SendGrid API key exists
+    if (!process.env.SENDGRID_API_KEY) {
+      console.error('SendGrid API key missing');
       return res.status(500).json({
         success: false,
         message: 'Email service configuration error'
       });
     }
 
-    // Email content
-    const mailOptions = {
-      from: `"${sanitized.fullName}" <${process.env.EMAIL_USER}>`,
+    // Email content using SendGrid
+    const msg = {
       to: 'devwithjacques@gmail.com',
+      from: 'devwithjacques@gmail.com', // Must be verified in SendGrid
       replyTo: sanitized.email,
       subject: sanitized.subject || `Portfolio Contact: Message from ${sanitized.fullName}`,
       html: `
@@ -234,14 +206,13 @@ Sent on: ${new Date().toLocaleString()}
       `
     };
 
-    // Send email
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
+    // Send email using SendGrid
+    await sgMail.send(msg);
+    console.log('Email sent successfully via SendGrid');
 
     res.status(200).json({
       success: true,
-      message: 'Email sent successfully!',
-      messageId: info.messageId
+      message: 'Email sent successfully!'
     });
 
   } catch (error) {
@@ -275,7 +246,7 @@ app.use('*', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📧 Email service: Gmail`);
+  console.log(`📧 Email service: SendGrid`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔐 CORS configured for multiple origins`);
 });
