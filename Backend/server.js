@@ -121,7 +121,7 @@ app.post('/send-email', async (req, res) => {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; border-radius: 10px; overflow: hidden;">
           <!-- Header Section -->
-          <div style="background: linear-gradient(90deg, #df8908, #ff1d15); padding: 30px; text-align: center;">
+          <div style="background: linear-gradient(270deg, #02d483 10%, #037449 100%); padding: 30px; text-align: center;">
             <h1 style="margin: 0; font-size: 28px; font-weight: bold; color: #ffffff;">
               New Contact Form Submission
             </h1>
@@ -133,35 +133,35 @@ app.post('/send-email', async (req, res) => {
           <!-- Content Section -->
           <div style="padding: 30px; background-color: #ffffff;">
             <!-- Contact Details Card -->
-            <div style="background-color: #f8f9fa; border-left: 5px solid #ea580c; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
-              <h3 style="color: #ea580c; font-size: 20px; margin: 0 0 15px 0;">
+            <div style="background-color: #f8f9fa; border-left: 5px solid #05de8b; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
+              <h3 style="color: #05de8b; font-size: 20px; margin: 0 0 15px 0;">
                 Contact Details
               </h3>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c; width: 80px;">Name:</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #05de8b; width: 80px;">Name:</td>
                   <td style="padding: 8px 0; color: #333;">${sanitized.fullName}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Email:</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #05de8b;">Email:</td>
                   <td style="padding: 8px 0;">
-                    <a href="mailto:${sanitized.email}" style="color: #df8908; text-decoration: none; font-weight: bold;">${sanitized.email}</a>
+                    <a href="mailto:${sanitized.email}" style="color: #02d483; text-decoration: none; font-weight: bold;">${sanitized.email}</a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Phone:</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #05de8b;">Phone:</td>
                   <td style="padding: 8px 0; color: #333;">${sanitized.phone || 'Not provided'}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #ea580c;">Subject:</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #05de8b;">Subject:</td>
                   <td style="padding: 8px 0; color: #333;">${sanitized.subject || 'No subject'}</td>
                 </tr>
               </table>
             </div>
             
             <!-- Message Card -->
-            <div style="background-color: #f8f9fa; border-left: 5px solid #df8908; padding: 20px; border-radius: 5px;">
-              <h3 style="color: #ea580c; font-size: 20px; margin: 0 0 15px 0;">
+            <div style="background-color: #f8f9fa; border-left: 5px solid #02d483; padding: 20px; border-radius: 5px;">
+              <h3 style="color: #05de8b; font-size: 20px; margin: 0 0 15px 0;">
                 Message
               </h3>
               <div style="background-color: #ffffff; padding: 15px; border-radius: 5px; border: 1px solid #e9ecef;">
@@ -171,18 +171,18 @@ app.post('/send-email', async (req, res) => {
           </div>
           
           <!-- Footer Section -->
-          <div style="background-color: #333333; padding: 20px; text-align: center;">
+          <div style="background-color: #0a0a0a; padding: 20px; text-align: center;">
             <p style="margin: 0; font-size: 14px; color: #ffffff;">
               Sent from your Portfolio Contact Form
             </p>
             <p style="margin: 10px 0 0 0; font-size: 14px;">
-              <a href="https://www.softflair.co.za" style="color: #df8908; text-decoration: none; font-weight: bold;">
+              <a href="https://www.softflair.co.za" style="color: #05de8b; text-decoration: none; font-weight: bold;">
                 Visit Portfolio Website
               </a>
             </p>
             <div style="margin-top: 15px;">
-              <span style="color: #df8908; font-size: 18px; font-weight: bold;">
-                Jacques du Toit - Web Developer
+              <span style="color: #05de8b; font-size: 18px; font-weight: bold;">
+                SoftFlair - Web Development
               </span>
             </div>
             <div style="margin-top: 10px; font-size: 12px; color: #999;">
