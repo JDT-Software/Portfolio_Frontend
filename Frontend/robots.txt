@@ -1,0 +1,44 @@
+# Robots.txt for SoftFlair Web Development
+# Professional Web Development Services in South Africa
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.softflair.co.za/sitemap.xml
+
+# Crawl delays (optional - helps with server load)
+Crawl-delay: 1
+
+# Allow important files
+Allow: /resources/css/
+Allow: /resources/js/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Block unnecessary files/directories (if any exist)
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.log$
+Disallow: /admin/
+Disallow: /backup/
+
+# Additional search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block bad bots (add as needed)
+User-agent: BadBot
+Disallow: /

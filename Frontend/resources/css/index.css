@@ -132,11 +132,11 @@
         }
         .btn {
             display: inline-block;
-            padding: 1rem 3rem;
+            padding: 0.8rem 2rem;
             background-color: var(--main-color);
             box-shadow: 0 0 25px var(--main-color);
-            border-radius: 3rem;
-            font-size: 1.8rem;
+            border-radius: 2.5rem;
+            font-size: 1.5rem;
             color: black;
             border: 2px solid transparent;
             font-weight: 600;
@@ -154,6 +154,19 @@
             box-shadow: 0 0 25px transparent;
         }
         .btn-group a:nth-of-type(2):hover {
+            background-color: var(--main-color);
+            color: black;
+            box-shadow: 0 0 25px var(--main-color);
+        }
+        
+        /* More Info button styling */
+        .service-card-buttons a:first-child {
+            background-color: black;
+            color: var(--main-color);
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 25px transparent;
+        }
+        .service-card-buttons a:first-child:hover {
             background-color: var(--main-color);
             color: black;
             box-shadow: 0 0 25px var(--main-color);
@@ -346,7 +359,8 @@
         }
         .detailed-services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
             gap: 3rem;
             margin-bottom: 0;
         }
@@ -357,6 +371,7 @@
             border: 2px solid var(--main-color);
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(5, 222, 139, 0.1);
+            text-align: center;
         }
         .detailed-service-card:hover {
             transform: translateY(-5px);
@@ -393,6 +408,20 @@
         }
         .learn-more-btn:hover {
             color: #02d483;
+        }
+
+        /* Service Card Buttons Container */
+        .service-card-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .service-card-buttons .learn-more-btn {
+            flex: 1;
+            text-align: center;
+            min-width: 100px;
         }
 
         /* Package Comparison Section */
@@ -991,3 +1020,1046 @@
                 padding: 0.8rem 1.5rem;
             }
         }
+
+/* Service Card Images */
+.service-card-image {
+    width: 100%;
+    max-width: 165px;
+    height: auto;
+    margin: 0.5rem auto;
+    display: block;
+    border-radius: 1rem;
+}
+
+/* About Section Image */
+.about-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 2rem;
+}
+
+/* Business Websites Page Styles */
+.business-websites {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.business-websites .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.business-websites h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    margin-top: 4rem;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: 2rem;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.hero-text p {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Features Section */
+.features-section {
+    padding: 8rem 15% 0;
+    min-height: auto;
+}
+
+.features-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.features-section h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.features-subtitle {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Features Carousel */
+.features-carousel {
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    position: relative;
+}
+
+.features-carousel::before,
+.features-carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.features-carousel::before {
+    left: 0;
+    background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+}
+
+.features-carousel::after {
+    right: 0;
+    background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+}
+
+.features-track {
+    display: flex;
+    gap: 3rem;
+    animation: scroll-left 40s linear infinite;
+    width: calc(200% + 3rem);
+}
+
+.features-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 1.5rem));
+    }
+}
+
+.feature-item {
+    background: var(--bg-color);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+    border: 2px solid var(--main-color);
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 280px;
+    flex-shrink: 0;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(5, 222, 139, 0.2);
+}
+
+.feature-item i {
+    font-size: 4rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-item h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--main-color);
+}
+
+.feature-item p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* Responsive Design for Business Websites Page */
+@media(max-width: 1285px) {
+    .business-websites {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .business-websites h1 {
+        font-size: 4rem;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-text p {
+        font-size: 1.4rem;
+    }
+
+    .features-section {
+        padding: 6rem 5% 0;
+    }
+
+    .features-section h2 {
+        font-size: 3rem;
+    }
+
+    .features-track {
+        gap: 2rem;
+        animation-duration: 30s;
+    }
+    
+    .feature-item {
+        min-width: 250px;
+    }
+
+    .feature-item {
+        padding: 2.5rem 2rem;
+    }
+
+    .feature-item h3 {
+        font-size: 1.8rem;
+    }
+
+    .feature-item p {
+        font-size: 1.3rem;
+    }
+}
+
+/* Landing Pages Styles */
+.landing-pages {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.landing-pages .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.landing-pages h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design for Landing Pages */
+@media(max-width: 1285px) {
+    .landing-pages {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .landing-pages h1 {
+        font-size: 4rem;
+    }
+}
+
+/* Website Redesign Styles */
+.website-redesign {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.website-redesign .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.website-redesign h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design for Website Redesign */
+@media(max-width: 1285px) {
+    .website-redesign {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .website-redesign h1 {
+        font-size: 4rem;
+    }
+}
+
+/* Portfolio Websites Styles */
+.portfolio-websites {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.portfolio-websites .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.portfolio-websites h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design for Portfolio Websites */
+@media(max-width: 1285px) {
+    .portfolio-websites {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .portfolio-websites h1 {
+        font-size: 4rem;
+    }
+}
+
+/* Web Applications Styles */
+.web-applications {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.web-applications .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.web-applications h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design for Web Applications */
+@media(max-width: 1285px) {
+    .web-applications {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .web-applications h1 {
+        font-size: 4rem;
+    }
+}
+
+/* SEO Services Styles */
+.seo-services {
+    min-height: 90vh;
+    padding: 15rem 15% 8rem;
+}
+
+.seo-services .container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.seo-services h1 {
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+/* Responsive Design for SEO Services */
+@media(max-width: 1285px) {
+    .seo-services {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .seo-services h1 {
+        font-size: 4rem;
+    }
+}
+
+/* Process Section - Accordion Style */
+.process-section {
+    padding: 0 15% 8rem;
+    text-align: center;
+    min-height: auto;
+}
+
+.process-section .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-section h2 {
+    font-size: 4.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.process-section p {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.process-subtitle {
+    color: #888;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.accordion {
+    margin: 0 0 4rem 0;
+}
+
+.accordion-item {
+    margin-bottom: 1.5rem;
+    background: var(--bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(5, 222, 139, 0.2);
+}
+
+.accordion-item.active {
+    border-color: var(--main-color);
+    box-shadow: 0 15px 40px rgba(5, 222, 139, 0.3);
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+}
+
+.accordion-item.active .accordion-header {
+    background: transparent;
+}
+
+.accordion-header:hover {
+    background: rgba(5, 222, 139, 0.05);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+}
+
+.step-number {
+    width: 5rem;
+    height: 5rem;
+    background: var(--main-color);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.step-info h3 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.timeline-duration {
+    color: var(--main-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.accordion-icon {
+    font-size: 2.4rem;
+    transition: transform 0.3s;
+    color: var(--main-color);
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding: 0 3rem;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    padding: 2.5rem 3rem 3rem;
+}
+
+.content-inner {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.step-icon {
+    font-size: 4.8rem;
+    min-width: 6rem;
+    color: var(--main-color);
+}
+
+.content-text p {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.content-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.content-text li {
+    color: #888;
+    padding: 0.8rem 0;
+    padding-left: 2.5rem;
+    position: relative;
+    font-size: 1.3rem;
+}
+
+.content-text li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+/* Mobile responsive for Process Section */
+@media (max-width: 1285px) {
+    .process-section {
+        padding: 0 5% 6rem;
+    }
+
+    .process-section h2 {
+        font-size: 3rem;
+    }
+
+    .process-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .accordion-header {
+        padding: 2rem;
+    }
+
+    .header-left {
+        gap: 1.5rem;
+    }
+
+    .step-number {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 0;
+
+
+
+
+
+
+
+/* FAQ Page Styles */
+.faq-services {
+    padding: 12rem 15% 8rem;
+    min-height: auto;
+}
+
+.faq-services .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faq-services h1 {
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* FAQ Categories Section */
+.faq-categories-section {
+    padding: 8rem 15% 0;
+    min-height: auto;
+}
+
+.faq-categories-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-categories-section h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.faq-categories-subtitle {
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.faq-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 0;
+}
+
+.faq-category-card {
+    background: var(--second-bg-color);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+    border: 2px solid var(--main-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.faq-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(5, 222, 139, 0.2);
+    border-color: var(--main-color);
+}
+
+.faq-category-card i {
+    font-size: 4rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+}
+
+.faq-category-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.faq-category-card p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* FAQ Sections */
+.faq-section {
+    padding: 8rem 15% 0;
+    min-height: auto;
+}
+
+.faq-section .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.faq-section h2 i {
+    color: var(--main-color);
+}
+
+/* FAQ Accordion */
+.faq-accordion {
+    margin-bottom: 4rem;
+}
+
+.faq-item {
+    margin-bottom: 2rem;
+    background: var(--bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(5, 222, 139, 0.2);
+}
+
+.faq-item.active {
+    border-color: var(--main-color);
+    box-shadow: 0 15px 40px rgba(5, 222, 139, 0.3);
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-header:hover {
+    background: rgba(5, 222, 139, 0.05);
+}
+
+.faq-header h3 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 0;
+    flex: 1;
+    text-align: left;
+}
+
+.faq-header i {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding: 0 2.5rem;
+}
+
+.faq-item.active .faq-content {
+    max-height: 1000px;
+    padding: 0 2.5rem 2.5rem;
+}
+
+.faq-content p {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.faq-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.faq-content li {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    padding: 0.8rem 0;
+    padding-left: 2.5rem;
+    position: relative;
+    opacity: 0.9;
+}
+
+.faq-content li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.faq-content ol {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.faq-content ol li {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    padding: 0.5rem 0;
+    padding-left: 0;
+    opacity: 0.9;
+    list-style: decimal;
+}
+
+.faq-content ol li::before {
+    display: none;
+}
+
+.faq-content strong {
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+/* Contact CTA Section */
+.contact-cta-section {
+    padding: 8rem 15%;
+    background: var(--second-bg-color);
+    margin-top: 8rem;
+}
+
+.contact-cta-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.cta-content {
+    text-align: left;
+}
+
+.cta-content h2 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.cta-content p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cta-features {
+    display: grid;
+    gap: 3rem;
+}
+
+.cta-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.cta-feature i {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-top: 0.5rem;
+}
+
+.cta-feature h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.cta-feature p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Mobile Responsive for FAQ */
+@media(max-width: 1285px) {
+    .faq-services {
+        padding: 12rem 5% 6rem;
+    }
+    
+    .faq-services h1 {
+        font-size: 4rem;
+    }
+
+    .faq-categories-section {
+        padding: 6rem 5% 0;
+    }
+
+    .faq-categories-section h2 {
+        font-size: 3rem;
+    }
+
+    .faq-categories-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .faq-category-card {
+        padding: 2.5rem 2rem;
+    }
+
+    .faq-category-card h3 {
+        font-size: 1.8rem;
+    }
+
+    .faq-category-card p {
+        font-size: 1.3rem;
+    }
+
+    .faq-section {
+        padding: 6rem 5% 0;
+    }
+
+    .faq-section h2 {
+        font-size: 2.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .faq-header {
+        padding: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .faq-header h3 {
+        font-size: 1.7rem;
+    }
+
+    .faq-header i {
+        align-self: flex-end;
+        font-size: 2rem;
+    }
+
+    .faq-content {
+        padding: 0 2rem;
+    }
+
+    .faq-item.active .faq-content {
+        padding: 0 2rem 2rem;
+    }
+
+    .faq-content p {
+        font-size: 1.4rem;
+    }
+
+    .faq-content li {
+        font-size: 1.3rem;
+    }
+
+    .contact-cta-section {
+        padding: 6rem 5%;
+    }
+
+    .contact-cta-section .container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .cta-content h2 {
+        font-size: 3rem;
+    }
+
+    .cta-content p {
+        font-size: 1.4rem;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+
+    .cta-features {
+        gap: 2rem;
+    }
+
+    .cta-feature {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .cta-feature h3 {
+        font-size: 1.6rem;
+    }
+
+    .cta-feature p {
+        font-size: 1.3rem;
+    }
+}
+        line-height: 1;
+    }
+
+    .step-info h3 {
+        font-size: 1.8rem;
+    }
+
+    .timeline-duration {
+        font-size: 1.2rem;
+    }
+
+    .accordion-content {
+        padding: 0 2rem;
+    }
+
+    .accordion-item.active .accordion-content {
+        padding: 2rem;
+    }
+
+    .content-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .step-icon {
+        font-size: 4rem;
+        align-self: center;
+    }
+
+    .content-text p {
+        font-size: 1.3rem;
+    }
+
+    .content-text li {
+        font-size: 1.2rem;
+        padding-left: 2rem;
+    }
+}
