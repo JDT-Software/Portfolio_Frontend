@@ -448,26 +448,30 @@
             border: 2px solid var(--main-color);
             transition: all 0.3s ease;
             position: relative;
-            
+            overflow: hidden;
+        }
+        
+        /* Discount Ribbon */
+        .discount-ribbon {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #ff0000;
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 1.4rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .package-card.featured {
             border: 3px solid #ffd700;
             transform: scale(1.05);
             background: linear-gradient(135deg, #1a1500 0%, #2d2200 50%, #1a1500 100%);
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-        }
-        .package-card.featured::before {
-            content: "Most Popular";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #000000;
-            background: #ffd700;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            font-weight: 600;
         }
         .package-card:hover {
             transform: translateY(-5px);
@@ -630,19 +634,6 @@
             background: transparent;
             color: #6a0dad;
             box-shadow: 0 0 25px #6a0dad;
-        }
-        .package-card.enterprise::before {
-            content: "Premium Solution";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #6a0dad;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            font-weight: 600;
         }
 
         /* Process Section */
@@ -820,6 +811,7 @@
             box-shadow: 0 0 30px rgba(5, 222, 139, 0.3);
             position: relative;
             animation: modalSlideIn 0.3s ease-out;
+            font-family: 'Poppins', sans-serif;
         }
         @keyframes modalSlideIn {
             from {
@@ -875,6 +867,437 @@
         }
         .close:hover {
             color: var(--main-color);
+        }
+
+        /* ===================================
+           RETRO NEON PROMO MODAL STYLES
+           =================================== */
+
+        /* Modal Overlay */
+        .promo-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .promo-modal.show {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Modal Content Container */
+        .promo-content {
+            background: linear-gradient(135deg, #0a0020 0%, #1a0030 50%, #0a0020 100%) !important;
+            border: 3px solid #ff0099 !important;
+            border-radius: 2rem !important;
+            max-width: 600px !important;
+            max-height: 90vh !important;
+            width: 90% !important;
+            padding: 30px 25px !important;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 153, 0.6),
+                0 0 60px rgba(255, 0, 153, 0.4),
+                inset 0 0 30px rgba(255, 0, 153, 0.1) !important;
+            animation: slideUp 0.5s ease, neonGlow 2s ease-in-out infinite !important;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 30px rgba(255, 0, 153, 0.6),
+                    0 0 60px rgba(255, 0, 153, 0.4),
+                    inset 0 0 30px rgba(255, 0, 153, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px rgba(255, 0, 153, 0.8),
+                    0 0 80px rgba(255, 0, 153, 0.6),
+                    inset 0 0 40px rgba(255, 0, 153, 0.2);
+            }
+        }
+
+        /* Decorative Corner Lines */
+        .promo-content::before,
+        .promo-content::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid;
+        }
+
+        .promo-content::before {
+            top: -2px;
+            left: -2px;
+            border-color: #00d9ff transparent transparent #00d9ff;
+            border-radius: 2rem 0 0 0;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+        }
+
+        .promo-content::after {
+            bottom: -2px;
+            right: -2px;
+            border-color: transparent #ff0099 #ff0099 transparent;
+            border-radius: 0 0 2rem 0;
+            box-shadow: 0 0 20px rgba(255, 0, 153, 0.6);
+        }
+
+        /* Close Button */
+        .promo-content .close {
+            display: none !important;
+        }
+
+        /* Promo Icon - Hidden for cleaner look */
+        .promo-icon {
+            display: none;
+        }
+
+        /* Main Heading */
+        .promo-content h2 {
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            text-transform: uppercase;
+            letter-spacing: 4px !important;
+            color: #fff !important;
+            text-align: center;
+            margin-bottom: 8px !important;
+            text-shadow: 
+                0 0 10px #ff0099,
+                0 0 20px #ff0099,
+                0 0 30px #ff0099,
+                0 0 40px #ff0099,
+                0 0 50px #ff0099 !important;
+            animation: titlePulse 2s ease-in-out infinite !important;
+            line-height: 1.2;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px #ff0099,
+                    0 0 20px #ff0099,
+                    0 0 30px #ff0099,
+                    0 0 40px #ff0099,
+                    0 0 50px #ff0099;
+            }
+            50% {
+                text-shadow: 
+                    0 0 5px #ff0099,
+                    0 0 10px #ff0099,
+                    0 0 15px #ff0099,
+                    0 0 20px #ff0099,
+                    0 0 25px #ff0099;
+            }
+        }
+
+        /* Subtitle */
+        .promo-content h3 {
+            font-size: 16px !important;
+            color: #00d9ff !important;
+            text-align: center;
+            margin-bottom: 20px !important;
+            text-transform: uppercase;
+            letter-spacing: 2px !important;
+            text-shadow: 0 0 15px #00d9ff !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 500 !important;
+        }
+
+        /* Cyan Underline */
+        .promo-content h3::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+            margin: 15px auto 0;
+            box-shadow: 0 0 10px #00d9ff;
+        }
+
+        /* Offers Container */
+        .promo-offers {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            margin: 15px 0 !important;
+        }
+
+        /* Individual Offer Item */
+        .promo-item {
+            background: linear-gradient(135deg, rgba(255, 0, 153, 0.1), rgba(0, 217, 255, 0.1)) !important;
+            border: 2px solid !important;
+            border-image: linear-gradient(90deg, #ff0099, #00d9ff) 1 !important;
+            padding: 15px !important;
+            border-radius: 15px !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: block !important;
+            text-align: center !important;
+        }
+
+        .promo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .promo-item:hover::before {
+            left: 100%;
+        }
+
+        .promo-item:hover {
+            transform: translateY(-5px) scale(1.02) !important;
+            box-shadow: 
+                0 10px 30px rgba(255, 0, 153, 0.4),
+                0 0 40px rgba(0, 217, 255, 0.3) !important;
+        }
+
+        /* Badge Styles */
+        .promo-badge {
+            display: inline-block;
+            padding: 6px 16px !important;
+            border-radius: 20px !important;
+            font-weight: bold !important;
+            font-size: 12px !important;
+            text-transform: uppercase;
+            letter-spacing: 1px !important;
+            margin-bottom: 10px !important;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bronze-badge {
+            background: linear-gradient(90deg, #ff0099, #ff6699) !important;
+            color: #fff !important;
+            box-shadow: 0 0 20px rgba(255, 0, 153, 0.6) !important;
+        }
+
+        .gold-badge {
+            background: linear-gradient(90deg, #00d9ff, #00ffaa) !important;
+            color: #000 !important;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.6) !important;
+        }
+
+        /* Package Name */
+        .promo-item strong {
+            font-size: 20px !important;
+            color: #fff !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Price Info Container */
+        .price-info {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 15px !important;
+            margin-top: 10px !important;
+            flex-wrap: wrap;
+        }
+
+        /* Old Price */
+        .old-price {
+            font-size: 16px !important;
+            color: #666 !important;
+            text-decoration: line-through;
+            position: relative;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 600 !important;
+            margin-right: 0.5rem !important;
+        }
+
+        /* New Price */
+        .new-price {
+            font-size: 24px !important;
+            font-weight: bold !important;
+            color: #00d9ff !important;
+            text-shadow: 
+                0 0 10px #00d9ff,
+                0 0 20px #00d9ff !important;
+            animation: priceGlow 1.5s ease-in-out infinite;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        @keyframes priceGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px #00d9ff,
+                    0 0 20px #00d9ff;
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px #00d9ff,
+                    0 0 30px #00d9ff,
+                    0 0 45px #00d9ff;
+            }
+        }
+
+        /* Promo Text */
+        .promo-text {
+            text-align: center;
+            color: #999 !important;
+            font-size: 14px !important;
+            margin: 15px 0 10px !important;
+            line-height: 1.4;
+            font-family: 'Poppins', sans-serif !important;
+            font-style: normal !important;
+        }
+
+        /* Expiry Date */
+        .promo-expiry {
+            text-align: center;
+            padding: 10px 20px !important;
+            background: rgba(255, 0, 153, 0.15) !important;
+            border: 2px solid #ff0099 !important;
+            border-radius: 10px !important;
+            margin: 12px 0 15px !important;
+            color: #ff0099 !important;
+            font-weight: bold !important;
+            font-size: 14px !important;
+            text-transform: uppercase;
+            letter-spacing: 2px !important;
+            text-shadow: 0 0 10px #ff0099 !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        /* Buttons Container */
+        .promo-buttons {
+            display: flex !important;
+            gap: 10px !important;
+            margin-top: 15px !important;
+            flex-wrap: wrap;
+        }
+
+        /* Primary Button */
+        .promo-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 20px !important;
+            background: linear-gradient(90deg, #ff0099, #ff6699) !important;
+            color: #fff !important;
+            text-decoration: none !important;
+            border: none !important;
+            border-radius: 30px !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            text-transform: uppercase;
+            letter-spacing: 2px !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 153, 0.5) !important;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 0 40px rgba(255, 0, 153, 0.8) !important;
+            background: linear-gradient(90deg, #ff6699, #ff0099) !important;
+        }
+
+        /* Secondary Button */
+        .promo-btn-secondary {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 20px !important;
+            background: transparent !important;
+            color: #00d9ff !important;
+            border: 2px solid #00d9ff !important;
+            border-radius: 30px !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            text-transform: uppercase;
+            letter-spacing: 2px !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px #00d9ff !important;
+        }
+
+        .promo-btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.2) !important;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5) !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .promo-content {
+                padding: 40px 25px !important;
+                width: 95% !important;
+            }
+
+            .promo-content h2 {
+                font-size: 36px !important;
+                letter-spacing: 4px !important;
+            }
+
+            .promo-content h3 {
+                font-size: 16px !important;
+                letter-spacing: 2px !important;
+            }
+
+            .promo-item strong {
+                font-size: 20px !important;
+            }
+
+            .old-price {
+                font-size: 18px !important;
+            }
+
+            .new-price {
+                font-size: 26px !important;
+            }
+
+            .promo-buttons {
+                flex-direction: column;
+            }
+
+            .promo-btn,
+            .promo-btn-secondary {
+                min-width: 100%;
+            }
+
+            .price-info {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 5px !important;
+            }
         }
 
         @media(max-width: 1285px) {

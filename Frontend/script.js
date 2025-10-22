@@ -98,3 +98,74 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     }
 });
 
+// ===================================
+// RETRO NEON PROMO MODAL JAVASCRIPT
+// ===================================
+
+// Show modal on page load
+window.addEventListener('load', function() {
+    // Check if modal was already seen in this session
+    if (!sessionStorage.getItem('promoModalSeen')) {
+        showPromoModal();
+    }
+});
+
+// Show the promo modal
+function showPromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.display = 'flex';
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Close the promo modal
+function closePromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) {
+        modal.classList.remove('show');
+        
+        // Fade out animation
+        modal.style.opacity = '0';
+        
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modal.style.opacity = '1';
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }, 300);
+        
+        // Mark modal as seen in this session
+        sessionStorage.setItem('promoModalSeen', 'true');
+    }
+}
+
+// Update window.onclick to include promo modal
+const originalWindowClick = window.onclick;
+window.onclick = function(event) {
+    const successModal = document.getElementById('successModal');
+    const errorModal = document.getElementById('errorModal');
+    const promoModal = document.getElementById('promoModal');
+    
+    if (event.target === successModal) {
+        closeModal();
+    }
+    if (event.target === errorModal) {
+        closeModal();
+    }
+    if (event.target === promoModal) {
+        closePromoModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const promoModal = document.getElementById('promoModal');
+        if (promoModal && promoModal.classList.contains('show')) {
+            closePromoModal();
+        }
+    }
+});
