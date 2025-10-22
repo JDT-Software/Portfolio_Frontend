@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="resources/images/SoftFlair2.png"/>
+      <square150x150logo src="resources/images/SoftFlair2.png"/>
+      <wide310x150logo src="resources/images/SoftFlair2.png"/>
+      <square310x310logo src="resources/images/SoftFlair2.png"/>
+      <TileColor>#05de8b</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>
