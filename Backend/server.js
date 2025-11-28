@@ -114,8 +114,8 @@ app.post('/send-email', async (req, res) => {
 
     // Email content using SendGrid
     const msg = {
-      to: 'devwithjacques@gmail.com',
-      from: 'devwithjacques@gmail.com', // Must be verified in SendGrid
+      to: 'info@softflair.co.za',
+      from: 'info@softflair.co.za', // Must be verified in SendGrid
       replyTo: sanitized.email,
       subject: sanitized.subject || `Portfolio Contact: Message from ${sanitized.fullName}`,
       html: `
