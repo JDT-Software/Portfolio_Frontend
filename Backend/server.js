@@ -83,6 +83,8 @@ const validateContactForm = (data) => {
 
 // Email sending endpoint
 app.post('/send-email', async (req, res) => {
+    // TEMPORARY: Log if API key is loaded
+    console.log("API key exists:", !!process.env.SENDGRID_API_KEY);
   try {
     console.log('Received contact form submission:', {
       fullName: req.body.fullName,
